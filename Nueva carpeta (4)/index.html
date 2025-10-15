@@ -1,0 +1,58 @@
+        <button id="add">+</button>
+        <button id="subtract">-</button>
+        <button id="multiply">×</button>
+        <button id="divide">÷</button>
+    </div>
+    
+    <div id="result">Resultado: -</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const number1Input = document.getElementById('number1');
+            const number2Input = document.getElementById('number2');
+            const resultDisplay = document.getElementById('result');
+            
+            function calculate(operation) {
+                const num1 = parseFloat(number1Input.value);
+                const num2 = parseFloat(number2Input.value);
+                
+                if (isNaN(num1) || isNaN(num2)) {
+                    resultDisplay.textContent = 'Error: Ingresa números válidos';
+                    resultDisplay.classList.add('error');
+                    return;
+                }
+                
+                resultDisplay.classList.remove('error');
+                let result = 0;
+                
+                switch (operation) {
+                    case 'add':
+                        result = num1 + num2;
+                        break;
+                    case 'subtract':
+                        result = num1 - num2;
+                        break;
+                    case 'multiply':
+                        result = num1 * num2;
+                        break;
+                    case 'divide':
+                        if (num2 === 0) {
+                            resultDisplay.textContent = 'Error: No se puede dividir por cero';
+                            resultDisplay.classList.add('error');
+                            return;
+                        }
+                        result = num1 / num2;
+                        break;
+                }
+                
+                resultDisplay.textContent = 'Resultado: ' + parseFloat(result.toFixed(10));
+            }
+            
+            document.getElementById('add').addEventListener('click', () => calculate('add'));
+            document.getElementById('subtract').addEventListener('click', () => calculate('subtract'));
+            document.getElementById('multiply').addEventListener('click', () => calculate('multiply'));
+            document.getElementById('divide').addEventListener('click', () => calculate('divide'));
+        });
+    </script>
+</body>
+</html>
